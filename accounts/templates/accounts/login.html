@@ -1,0 +1,14 @@
+{% extends 'Base2.html' %}
+
+
+{% block content %}
+    <h2>Log in</h2>
+    <form action="" method="post" class="form-check-inline">
+        {% csrf_token %}
+        <div class="col-md-9">
+        {{ form.as_p }}
+        </div>
+        <input type="submit" value="Log in" class="book_btn">
+    </form>
+
+{% endblock %}

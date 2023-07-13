@@ -1,0 +1,24 @@
+{% extends 'Base.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+
+{% block blog %}
+    {% for bl in blog %}
+    <div class="row d_flex">
+        <div class=" col-md-4">
+            <div class="latest">
+                <figure><img src="{{ bl.image.url }}" alt="#"/></figure>
+                <span>{{ bl.created }}</span>
+                <div class="nostrud">
+                    <h3>{{ bl.title }}</h3>
+                    <p>{{ bl.bodu | truncatewords:28 }}</p>
+                    <a class="read_more" href="blog.html">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
