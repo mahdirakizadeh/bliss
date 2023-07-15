@@ -54,7 +54,7 @@
                      <div class="navbar-area">
                         <nav class="site-navbar">
                            <ul>
-                              <li><a href="../home/templates/home/index.html">Home</a></li>
+                              <li><a href="Base.html">Home</a></li>
                               <li><a href="about.html">About</a></li>
                               <li><a href="{% url 'product:product' %}">Service</a></li>
                               <li><a href="{% url 'blog:blog' %}">Blog</a></li>
@@ -370,17 +370,19 @@
              {% endfor %}
          {% endblock %}
 
+         {% for bl2 in blog %}
                <div class=" col-md-4">
                   <div class="latest">
-                     <figure><img src="{% static 'images/blog2.jpg' %}" alt="#"/></figure>
-                     <span class="yellow">17 March</span>
+                     <figure><img src="{{ bl2.image.url }}" alt="#"/></figure>
+                     <span class="yellow">{{ bl2.created }}</span>
                      <div class="nostrud">
-                        <h3>Veniam, Quis </h3>
-                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
-                        <a class="read_more" href="blog.html">Read More</a>
+                        <h3>{{ bl2.title }}</h3>
+                        <p>{{ bl2.created }}</p>
+                        <a class="read_more" href="{{ bl2.get_absolute_url }}">Read More</a>
                      </div>
                   </div>
                </div>
+         {% endfor %}
                <div class=" col-md-4">
                   <div class="latest">
                      <figure><img src="{% static 'images/blog3.jpg' %}" alt="#"/></figure>
