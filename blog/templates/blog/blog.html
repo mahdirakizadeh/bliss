@@ -52,12 +52,12 @@
                            <ul>
                               <input type=button value="←" onClick="javascript:history.go(-1);">
                               <input type=button value="→" onClick="javascript:history.go(+1);">
-                              <li><a href="../../../Templates/Base.html">Home</a></li>
-                              <li><a href="../../../Templates/about.html">About</a></li>
-                              <li><a href="service.html">Service</a></li>
-                              <li><a class="active" href="blog.html">Blog</a></li>
-                              <li><a href="../../../contact_us/templates/contact_us/contact.html">Contact us</a></li>
-                              <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                              <li><a href="{% url 'home:home' %}">Home</a></li>
+                              <li><a class="active" href="{% url 'about:about' %}">About</a></li>
+                              <li><a href="{% url 'product:product' %}">Service</a></li>
+                              <li><a href="{% url 'blog:blog' %}">Blog</a></li>
+                              <li><a href="{% url 'contact:contact_us' %}">Contact us</a></li>
+                              <li class="d_none"><a href="{% url 'account:user_sign_up' %}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                               <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                            </ul>
                            <button class="nav-toggler">
@@ -88,7 +88,9 @@
             <div class="row d_flex">
                <div class=" col-md-4">
                   <div class="latest">
-                        <figure><img src="{{ bl.image.url }}" alt="#"></figure>
+                      {% for img in imgb %}
+                        <figure><img src="{{ img.image.url }}" alt="#"></figure>
+                      {% endfor %}
                      <span>{{ bl.created }}</span>
                      <div class="nostrud">
                         <h3>{{ bl.title }}</h3>
@@ -102,8 +104,10 @@
          {% for bl2 in blog %}
                <div class=" col-md-4">
                   <div class="latest">
-                     <figure><img src="{{ bl.image.url }}" alt="#"/></figure>
-                     <span class="yellow">{{ bl2.created }}</span>
+                     {% for img2 in imgb %}
+                         <figure><img src="{{ img2.image.url }}" alt="#"/></figure>
+                     {% endfor %}
+                     <span class="yellow">{{ bl.created }}</span>
                      <div class="nostrud">
                         <h3>{{ bl2.title }}</h3>
                         <p>{{ bl2.body | truncatewords:24 }}</p>
