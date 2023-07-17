@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Massage Therapy </title>
+      <title>Bliss</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -47,19 +47,21 @@
                <div class="row d_flex">
                   <div class=" col-md-3 col-sm-3">
                      <div class="logo">
-                        <a href="Base.html">Bliss</a>
+                        <a href="{% url 'home:home' %}">Bliss</a>
                      </div>
                   </div>
                   <div class="col-md-9 col-sm-9">
                      <div class="navbar-area">
                         <nav class="site-navbar">
                            <ul>
-                              <li><a href="Base.html">Home</a></li>
-                              <li><a href="about.html">About</a></li>
+                              <input type=button value="←" onClick="javascript:history.go(-1);">
+                              <input type=button value="→" onClick="javascript:history.go(+1);">
+                              <li><a href="{% url 'home:home' %}">Home</a></li>
+                              <li><a class="active" href="{% url 'about:about' %}">About</a></li>
                               <li><a href="{% url 'product:product' %}">Service</a></li>
                               <li><a href="{% url 'blog:blog' %}">Blog</a></li>
                               <li><a href="{% url 'contact:contact_us' %}">Contact us</a></li>
-                              <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                              <li class="d_none"><a href="{% url 'account:user_sign_up' %}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                               <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                            </ul>
                            <button class="nav-toggler">
@@ -358,10 +360,10 @@
                    <div class=" col-md-4">
                       <div class="latest">
                          <figure><img src="{{ bl.image.url }}" alt="#"/></figure>
-                         <span>{{ bl.created }}</span>
+                         <span>{{ blog.created }}</span>
                          <div class="nostrud">
-                            <h3>{{ bl.title }}</h3>
-                            <p>{{ bl.bodu | truncatewords:28 }}</p>
+                            <h3>{{ blog.title }}</h3>
+                            <p>{{ blog.body | truncatewords:28 }}</p>
                             <a class="read_more" href="blog.html">Read More</a>
                          </div>
                       </div>
@@ -412,7 +414,7 @@
                   <div class="titlepage text_align_left">
                      <h2>About Our Center</h2>
                      <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipsed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
-                     <a class="read_more" href="about.html">Read More</a>
+                     <a class="read_more" href="../about/templates/about/about.html">Read More</a>
                   </div>
                </div>
             </div>
@@ -540,7 +542,7 @@
                               <h3>Menu</h3>
                               <ul class="menu_footer">
                                  <li><a href="Base.html">Home</a></li>
-                                 <li><a href="about.html">About</a></li>
+                                 <li><a href="../about/templates/about/about.html">About</a></li>
                                  <li><a href="service.html">Service</a></li>
                                  <li><a href="blog.html">Blog</a></li>
                                  <li><a href="{% url 'contact:contact_us' %}">Contact us</a></li>
