@@ -19,8 +19,8 @@
       <link rel="stylesheet" href="{% static 'css/style.css' %}">
       <!-- Responsive-->
       <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-      <!-- fevicon -->
-      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
+      <!-- favicon -->
+      <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/gif" />
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -93,8 +93,8 @@
                                  <div class="creative">
                                     <h1>Spa <br>Center </h1>
                                     <p>commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint</p>
-                                    <a class="read_more" href="Javascript:void(0)">Contact us</a>
-                                    <a class="read_more" href="Javascript:void(0)">Read More</a>
+                                    <a class="read_more" href="{% url 'contact:contact_us' %}">Contact us</a>
+                                    <a class="read_more" href="{% url 'about:about' %}">Read More</a>
                                  </div>
                               </div>
                               <div class="col-md-7">
@@ -219,15 +219,21 @@
                      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>
                   </div>
                </div>
-               {% block contact %}
-                   <form action="" method="post" class="main_form">
-                      {% csrf_token %}
-                      <div class="col-md-6">
-                          {{ contact }}
-                      <button type="submit" class="send_btn">Send Now</button>
-                      </div>
-                   </form>
-               {% endblock %}
+               <div class="col-md-12">
+                  <form id="request" class="main_form">
+                     <div class="row">
+                        <div class="col-md-6 ">
+                            <form action="" method="post" class="main_form">
+                            {% csrf_token %}
+                            <div class="col-md-12">
+                                {{ contact.as_p }}
+                            </div>
+                            <button type="submit" class="send_btn">Send Now</button>
+                            </form>
+                        </div>
+                     </div>
+                  </form>
+               </div>
 {#               <div class="col-md-12">#}
 {#                  <form id="request" class="main_form">#}
 {#                     <div class="row">#}
@@ -342,8 +348,6 @@
       </div>
       <!-- end priceing -->
       <!-- blog -->
-      {% block blog %}
-
       <div class="blog">
          <div class="container">
             <div class="row">
@@ -359,8 +363,10 @@
                 <div class="row d_flex">
                    <div class=" col-md-4">
                       <div class="latest">
-                         <figure><img src="{{ bl.image.url }}" alt="#"/></figure>
-                         <span>{{ blog.created }}</span>
+                          {% for img in imgb %}
+                            <figure><img src="{{ img.image.url }}" alt="#"/></figure>
+                          {% endfor %}
+                         <span>{{ bl.created }}</span>
                          <div class="nostrud">
                             <h3>{{ blog.title }}</h3>
                             <p>{{ blog.body | truncatewords:28 }}</p>
@@ -370,12 +376,14 @@
                    </div>
                 </div>
              {% endfor %}
-         {% endblock %}
+
 
          {% for bl2 in blog %}
                <div class=" col-md-4">
                   <div class="latest">
-                     <figure><img src="{{ bl2.image.url }}" alt="#"/></figure>
+                      {% for img2 in imgb %}
+                          <figure><img src="{{ img2.image.url }}" alt="#"/></figure>
+                      {% endfor %}
                      <span class="yellow">{{ bl2.created }}</span>
                      <div class="nostrud">
                         <h3>{{ bl2.title }}</h3>
@@ -385,6 +393,7 @@
                   </div>
                </div>
          {% endfor %}
+
                <div class=" col-md-4">
                   <div class="latest">
                      <figure><img src="{% static 'images/blog3.jpg' %}" alt="#"/></figure>
@@ -414,7 +423,7 @@
                   <div class="titlepage text_align_left">
                      <h2>About Our Center</h2>
                      <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquipsed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
-                     <a class="read_more" href="../about/templates/about/about.html">Read More</a>
+                     <a class="read_more" href=".{% url 'about:about' %}">Read More</a>
                   </div>
                </div>
             </div>
