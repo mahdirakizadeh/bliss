@@ -55,10 +55,10 @@
                               <input type=button value="←" onClick="javascript:history.go(-1);">
                               <input type=button value="→" onClick="javascript:history.go(+1);">
                               <li><a href="{% url 'home:home' %}">Home</a></li>
-                              <li><a class="active" href="{% url 'about:about' %}">About</a></li>
+                              <li><a href="{% url 'about:about' %}">About</a></li>
                               <li><a href="{% url 'product:product' %}">Service</a></li>
                               <li><a href="{% url 'blog:blog' %}">Blog</a></li>
-                              <li><a href="{% url 'contact:contact_us' %}">Contact us</a></li>
+                              <li><a class="active" href="{% url 'contact:contact_us' %}">Contact us</a></li>
                               <li class="d_none"><a href="{% url 'account:user_sign_up' %}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                               <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                            </ul>
@@ -154,11 +154,11 @@
                            <div class="hedingh3 text_align_left">
                               <h3>Menu</h3>
                               <ul class="menu_footer">
-                                  <li><a href="../../../home/templates/home/index.html">Home</a></li>
-                                  <li><a href="about.html">About</a></li>
-                                  <li><a href="service.html">Service</a></li>
-                                  <li><a href="{% url 'blog:blog' %}">Blog</a></li>
-                                  <li><a href="{% url 'contact:contact_us' %}">Contact us</a></li>
+                                 <li><a href="{% url 'home:home' %}">Home</a></li>
+                                 <li><a href="{% url 'about:about' %}">About</a></li>
+                                 <li><a href="{% url 'product:product' %}">Service</a></li>
+                                 <li><a href="{% url 'blog:blog' %}">Blog</a></li>
+                                 <li><a class="active" href="{% url 'contact:contact_us' %}">Contact us</a></li>
                               </ul>
                            </div>
                         </div>
