@@ -5,7 +5,6 @@ from .models import BlogModel, Image
 
 
 class BlogView(View):
-
     def get(self, request):
         blog = BlogModel.objects.all()
         imgb = Image.objects.all()

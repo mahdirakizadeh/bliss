@@ -43,13 +43,13 @@
                <div class="row d_flex">
                   <div class=" col-md-3 col-sm-3">
                      <div class="logo">
-                        <a href="../../../Templates/Base.html">Bliss</a>
+                        <a href="{% url 'home:home' %}">Bliss</a>
                      </div>
                   </div>
                   <div class="col-md-9 col-sm-9">
                      <div class="navbar-area">
                         <nav class="site-navbar">
-                           <ul>
+                           <ul class="d-inline-flex">
                               <input type=button value="←" onClick="javascript:history.go(-1);">
                               <input type=button value="→" onClick="javascript:history.go(+1);">
                               <li><a href="{% url 'home:home' %}">Home</a></li>
@@ -84,49 +84,52 @@
             </div>
 
 
-         {% for bl in blog %}
-            <div class="row d_flex">
-               <div class=" col-md-4">
-                  <div class="latest">
-                      {% for img in imgb %}
-                        <figure><img src="{{ img.image.url }}" alt="#"></figure>
-                      {% endfor %}
-                     <span>{{ bl.created }}</span>
-                     <div class="nostrud">
-                        <h3>{{ bl.title }}</h3>
-                        <p>{{ bl.body | truncatewords:24}}</p>
-                        <a class="read_more" href="{{ bl.get_absolute_url }}">Read More</a>
-                     </div>
-                  </div>
-               </div>
+             {% for bl in imgb %}
+                {% for blo in bl.blogo.all %}
+                         <div class="row d_flex">
+                   <div class=" col-md-4">
+                      <div class="latest">
+{#                          {% for blo in bl.blogo.all %}#}
+                            <figure><img src="{{ blo.image.url }}" alt="#"></figure>
+{#                          {% endfor %}#}
+                         <span>{{ blo.created }}</span>
+                         <div class="nostrud">
+                            <h3>{{ blo.title }}</h3>
+                            <p>{{ blo.body | truncatewords:24}}</p>
+                            <a class="read_more" href="{{ bl.get_absolute_url }}">Read More</a>
+                         </div>
+                      </div>
+                   </div>
+             {% endfor %}
          {% endfor %}
-
-         {% for bl2 in blog %}
-               <div class=" col-md-4">
-                  <div class="latest">
-                     {% for img2 in imgb %}
-                         <figure><img src="{{ img2.image.url }}" alt="#"/></figure>
-                     {% endfor %}
-                     <span class="yellow">{{ bl.created }}</span>
-                     <div class="nostrud">
-                        <h3>{{ bl2.title }}</h3>
-                        <p>{{ bl2.body | truncatewords:24 }}</p>
-                        <a class="read_more" href="{{ bl2.get_absolute_url }}">Read More</a>
-                     </div>
-                  </div>
-               </div>
-         {% endfor %}
-               <div class=" col-md-4">
-                  <div class="latest">
-                     <figure><img src="images/blog3.jpg" alt="#"/></figure>
-                     <span>18 March</span>
-                     <div class="nostrud">
-                        <h3>Tempor incididunt </h3>
-                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
-                        <a class="read_more" href="blog.html">Read More</a>
-                     </div>
-                  </div>
-               </div>
+{##}
+{#         {% for bl2 in blog %}#}
+{#               <div class=" col-md-4">#}
+{#                  <div class="latest">#}
+{#                     {% for img2 in imgb %}#}
+{#                         <figure><img src="{{ img2.image.url }}" alt="#"/></figure>#}
+{#                     {% endfor %}#}
+{#                     <span class="yellow">{{ bl.created }}</span>#}
+{#                     <div class="nostrud">#}
+{#                        <h3>{{ bl2.title }}</h3>#}
+{#                        <p>{{ bl2.body | truncatewords:24 }}</p>#}
+{#                        <a class="read_more" href="{{ bl2.get_absolute_url }}">Read More</a>#}
+{#                     </div>#}
+{#                  </div>#}
+{#               </div>#}
+{#         {% endfor %}#}
+{#               <div class=" col-md-4">#}
+{#                  <div class="latest">#}
+{#                     <figure><img src="images/blog3.jpg" alt="#"/></figure>#}
+{#                     <span>18 March</span>#}
+{#                     <div class="nostrud">#}
+{#                        <h3>Tempor incididunt </h3>#}
+{#                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.#}
+{#                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>#}
+{#                        <a class="read_more" href="blog.html">Read More</a>#}
+{#                     </div>#}
+{#                  </div>#}
+{#               </div>#}
             </div>
          </div>
       </div>

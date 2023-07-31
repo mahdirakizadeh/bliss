@@ -21,5 +21,5 @@ class BlogModel(models.Model):
 
 
 class Image(models.Model):
-    bolg = models.ForeignKey(BlogModel, on_delete=models.CASCADE)
+    bolg = models.ForeignKey(BlogModel, on_delete=models.CASCADE, related_name='blogo')
     image = models.ImageField(upload_to='media', null=True, blank=True)
