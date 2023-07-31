@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'A.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bliss',
+        'USER': 'blissuser',
+        'PASSWORD': 'blisss',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -141,7 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 
-# Google Account
+# Google Account HOTEL Felicity
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -149,4 +153,17 @@ EMAIL_HOST_USER = 'mahdirr80@gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = 'semvwobbeencolxu'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'HOTEL Felicity'
+DEFAULT_FROM_EMAIL = 'Bliss'
+
+
+
+# Chabokan Cloud Storage
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = 'iun7AaM5f1v2lity0xEFS49kQlmLnOAe'
+AWS_SECRET_ACCESS_KEY = 'f0ydfNOqNh4gK2LzCJNd95OH8rthQ7wQ'
+AWS_S3_ENDPOINT_URL = 'https://minio-wgjucb.chbk.run'
+AWS_STORAGE_BUCKET_NAME = 'django-bliss'
+AWS_SERVICES_NAME = 's3'
+AWS_S3_FILE_OVERWRITE = False
+
