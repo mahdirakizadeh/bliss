@@ -8,6 +8,7 @@ from .models import OtpCode, User
 from django.utils import timezone
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+from utils import send_otp_code
 
 
 class UserSignupView(View):
@@ -20,9 +21,10 @@ class UserSignupView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
+            cd = form.cleaned_data
             random_code = random.randint(1000, 9999)
             print(random_code)
-            cd = form.cleaned_data
+            send_otp_code(cd['phone'], random_code)
             OtpCode.objects.create(phone_number=cd['phone'], code=random_code)
             request.session['user_signup_info'] = {
                 'phone_number': cd['phone'],
@@ -48,7 +50,7 @@ class UserSignupVerifyView(View):
         now = datetime.datetime.now()
         minute = now.minute
         expire_local_time = timezone.localtime(code_instance.created)
-        expire_minute = expire_local_time.minute + 1
+        expire_minute = expire_local_time.minute + 4
         form = self.form_class(request.POST)
 
         if form.is_valid():
@@ -56,7 +58,7 @@ class UserSignupVerifyView(View):
             if cd['code'] == code_instance.code:
                 if minute > expire_minute:
                     code_instance.delete()
-                    messages.error(request, "your code expired try again", 'danger')
+                    messages.error(request, "your code expired! try again", 'danger')
                     return redirect('account:user_sign_up')
                 else:
                     User.objects.create_user(user_session['email'], user_session['phone_number'], user_session[
