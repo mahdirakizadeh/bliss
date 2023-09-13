@@ -57,6 +57,9 @@
                             <ul class="d-inline-flex">
                                 <input type=button value="←" onClick="javascript:history.go(-1);">
                                 <input type=button value="→" onClick="javascript:history.go(+1);">
+                                {% if request.user.is_admin %}
+                                    <li><a href="{% url 'home:bucket' %}">Bucket</a></li>
+                                {% endif %}
                                 <li><a class="active" href="{% url 'home:home' %}">Home</a></li>
                                 <li><a href="{% url 'about:about' %}">About</a></li>
                                 <li><a href="{% url 'product:product' %}">Service</a></li>
@@ -400,31 +403,31 @@
 <div class="blog">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="titlepage text_align_center ">
-                    <h2>Latest Blog</h2>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>
-                </div>
-            </div>
-        </div>
-
-        {% for bl in blog %}
-            <div class="row d_flex">
-                <div class=" col-md-4">
-                    <div class="latest">
-                        {% for img in imgb %}
-                            <figure><img src="{{ img.image.url }}" alt="#"/></figure>
-                        {% endfor %}
-                        <span>{{ bl.created }}</span>
-                        <div class="nostrud">
-                            <h3>{{ blog.title }}</h3>
-                            <p>{{ blog.body | truncatewords:28 }}</p>
-                            <a class="read_more" href="blog.html">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+{#            <div class="col-md-12">#}
+{#                <div class="titlepage text_align_center ">#}
+{#                    <h2>Latest Blog</h2>#}
+{#                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        {% for bl in blog %}#}
+{#            <div class="row d_flex">#}
+{#                <div class=" col-md-4">#}
+{#                    <div class="latest">#}
+{#                        {% for img in imgb %}#}
+{#                            <figure><img src="{{ img.image.url }}" alt="#"/></figure>#}
+{#                        {% endfor %}#}
+{#                        <span>{{ bl.created }}</span>#}
+{#                        <div class="nostrud">#}
+{#                            <h3>{{ blog.title }}</h3>#}
+{#                            <p>{{ blog.body | truncatewords:28 }}</p>#}
+{#                            <a class="read_more" href="blog.html">Read More</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
 
 
         {% for bl2 in blog %}
@@ -465,8 +468,7 @@
         <div class="row d_flex grig">
             <div class="col-md-6">
                 <div class="about_img">
-                    <figure><img src="{% static 'images/about_img.jpg' %}" alt="#"/>
-                    </figure>
+                    <figure><img src="{% static 'images/about_img.jpg' %}" alt="#"/></figure>
                 </div>
             </div>
             <div class="col-md-6 order">
