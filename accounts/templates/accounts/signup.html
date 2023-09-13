@@ -8,8 +8,10 @@
         <div class="col-md-5">
             {{ form.as_p }}
         </div>
-        <input type="submit" value="Sign up" class="book_btn">
+        <div class="m-5">
+            <input type="submit" value="Sign up" class="book_btn">
+        </div>
     </form>
-    <h3>If you already have account click login <a href="{% url 'account:user_login' %}">Here</a></h3>
+    <h3>If you already have account click login <a href="{% url 'account:user_login' %}">-->Here</a></h3>
 
 {% endblock %}
