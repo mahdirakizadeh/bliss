@@ -37,3 +37,12 @@ class OtpCode(models.Model):
 
     def __str__(self):
         return f'{self.phone_number} - {self.code} - {self.created}'
+
+
+class OtpCodeForgot(models.Model):
+    email = models.EmailField()
+    code = models.PositiveIntegerField()
+    created = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.email} - {self.code} - {self.created}'

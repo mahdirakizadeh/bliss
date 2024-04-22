@@ -403,14 +403,14 @@
 <div class="blog">
     <div class="container">
         <div class="row">
-{#            <div class="col-md-12">#}
-{#                <div class="titlepage text_align_center ">#}
-{#                    <h2>Latest Blog</h2>#}
-{#                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
+            <div class="col-md-12">
+                <div class="titlepage text_align_center ">
+                    <h2>Latest Blog</h2>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>
+                </div>
+            </div>
+        </div>
+
 {#        {% for bl in blog %}#}
 {#            <div class="row d_flex">#}
 {#                <div class=" col-md-4">#}
@@ -433,8 +433,8 @@
         {% for bl2 in blog %}
             <div class=" col-md-4">
                 <div class="latest">
-                    {% for img2 in imgb %}
-                        <figure><img src="{{ img2.image.url }}" alt="#"/></figure>
+                    {% for img in imgb.blgo.all %}
+                            <figure><img src="{{ img.image.url }}" alt="#"/></figure>
                     {% endfor %}
                     <span class="yellow">{{ bl2.created }}</span>
                     <div class="nostrud">

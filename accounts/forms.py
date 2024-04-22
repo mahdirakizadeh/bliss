@@ -69,6 +69,22 @@ class VerifyCodeForm(forms.Form):
 
 
 class UserLoginForms(forms.Form):
-    phone = forms.CharField(label='Phone', widget=forms.TextInput(attrs={'class': 'form_control, book_n'}),
-                            max_length=12)
+    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form_control, book_n'}), max_length=12)
     password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'class': 'form_control, book_n'}))
+
+
+class ForgotForm(forms.Form):
+    email = forms.EmailField(label='Phone or email', widget=forms.EmailInput(attrs={'placeholder': 'Phone or email',
+                                                                                   'class': 'form_control, book_n'}))
+
+
+class VerifyForgotPasswordForm(forms.Form):
+    code = forms.IntegerField(label='Phone', widget=forms.TextInput(attrs={'placeholder': 'Enter Code', 'class'
+    : 'form_control, book_n'}))
+
+
+class NewPasswordForm(forms.Form):
+    Newpass = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'new password',
+                                                            'class': 'form_control, book_n'}))
+    confirm = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'placeholder': 'confirm new password',
+                                                                                  'class': 'form_control, book_n'}))

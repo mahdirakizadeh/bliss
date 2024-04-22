@@ -3,6 +3,7 @@ from django.views import View
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
+from django.contrib import messages
 
 
 class ContactView(View):
@@ -27,7 +28,10 @@ class ContactView(View):
 
             try:
                 send_mail(subject, message, 'mahdirr80@gmail.com', ['mahdirr80@gmail.com'])
+                messages.success(request, "your message was sent", 'success')
+                print('asaaaaaaaaaaaaa')
             except BadHeaderError:
+                print('asaaaaaaaaaaaaa')
                 return HttpResponse('Invalid header found.')
             return redirect('home:home')
 

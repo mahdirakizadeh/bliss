@@ -1,14 +1,15 @@
 import datetime
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserSignupForm, VerifyCodeForm, UserLoginForms
+from .forms import UserSignupForm, VerifyCodeForm, UserLoginForms, ForgotForm, VerifyForgotPasswordForm, NewPasswordForm
 import random
 from django.contrib import messages
-from .models import OtpCode, User
+from .models import OtpCode, User, OtpCodeForgot
 from django.utils import timezone
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from utils import send_otp_code
+# from utils import send_otp_code
+from django.core.mail import send_mail
 
 
 class UserSignupView(View):
@@ -97,3 +98,86 @@ class UserLogoutView(LoginRequiredMixin, View):
         logout(request)
         messages.success(request, 'you logout successfully', 'success')
         return redirect('home:home')
+
+
+class UserForgotPasswordView(View):
+    form_class = ForgotForm
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, 'accounts/forgot.html', {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        user = User.objects.all()
+        if form.is_valid():
+            cd = form.cleaned_data
+            request.session[' forgot_pass_session'] = {
+                'email': cd['email']
+            }
+            email_session = request.session['forgot_pass_session']
+            check_email = email_session['email']
+            if check_email == user.email:
+                random_code = random.randint(10000, 99999)
+                rc = f"your code is {random_code} Do not share it!"
+                print(rc)
+                send_mail(
+                    "Verify Code For Forgot Password",
+                    rc,
+                    'mahdirr80@gmail.com',
+                    [check_email]
+                )
+                messages.success(request, "code sent!", 'success')
+
+                OtpCodeForgot.objects.create(email=cd['email_session'], code=random_code)
+                if cd['code'] == random_code:
+                    return redirect('account:newpass')
+                messages.error(request, 'your code is not correct', 'error')
+                return redirect('account:forgot_password')
+
+            messages.error(request, "your email dose not exist!", 'error')
+            return redirect('account:forgot_password')
+
+        messages.error(request, 'please enter email', 'error')
+        return redirect('account:forgot_password')
+
+
+class VerifyForgotPasswordView(View):
+    form_class = VerifyForgotPasswordForm
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, 'accounts/verifyforgot.html', {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            email_session = request.session['forgot_pass_session']
+            code_instance = OtpCodeForgot.objects.get(email=email_session['email'])
+            if cd['code'] == code_instance:
+                return redirect('account:newpass')
+            messages.error(request, 'your code is not correct', 'error')
+            return redirect('account:verifyforgotpass')
+        messages.error(request, 'enter number!', 'error')
+        return redirect('account:verifyforgotpass')
+
+
+class NewPasswordView(View):
+    form_class = NewPasswordForm
+
+    def get(self, request):
+        form = self.form_class(request.POST)
+        return render(request, 'accounts/new_password.html', {'form': form})
+
+    def post(self, request):
+        form = self.form_class()
+        user = User.objects.get(id=request.id)
+        if form.is_valid():
+            user.set_password("new password")
+            user.save()
+            messages.success(request, 'your password just change' 'success')
+            return redirect('home:home')
+
+        messages.error(request, 'your password just change' 'error')
+        return redirect('account:newpass')
